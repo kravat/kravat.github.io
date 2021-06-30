@@ -78,6 +78,7 @@
         var responseHTML = xmlhttp.responseText;
         var el = document.createElement( 'html' );
         el.innerHTML = responseHTML;
+        alert(responseHTML);
         el.getElementsByTagName( 'span' );
         el.getElementsByClassName('item-title');
         alert(el[0]);
