@@ -71,7 +71,7 @@
 
       // Create the call to the XS API
       function getData(){
-        alert("Starting get data");
+
         var xmlhttp = new XMLHttpRequest();
         
         xmlhttp.open("GET", url, true);
@@ -80,6 +80,8 @@
         var responseHTML = xmlhttp.responseText;
         var el = document.createElement( 'html' );
         el.innerHTML = responseHTML;
+         alert(responseHTML);
+
         el.getElementsByTagName( 'span' );
         el.getElementsByClassName('item-title');
         document.getElementById("results").innerHTML = el[0].innerHTML;
