@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="description" content="TicketsNowApp">
+    <meta name="author" content="Sven Huberti">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>TicketsNow!</title>
+
+    <!-- CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Social bar stylesheet -->
+    <link rel="stylesheet" href="./css/socialBar.css">
+
+    <link href="http://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/theme/theme.css" rel="stylesheet">
+
+    <!-- Local theme -->
+    <link href="./css/front.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-iphone-retina.png">
+    <link rel="icon" href="./images/favicon.ico">
+    <!-- CSS style for google maps -->
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 100;}
+      .container,.panel {height:100%;}
+      .panel-transparent {
+          background: none;
+      }
+      .panel-transparent .panel-body{
+          background: rgba(0, 0, 0, 0.5)!important;
+      }
+    </style>
+    <!-- Google maps -->
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBflYaUQw_qAWHXqyF0Uml4Jd8tZWWVaFw"></script>-->
+    <title>Welcome to TicketsNow!</title>
+
+  </head>
+
+  <body role="document" onload="getData();" >
+    <div class="container">
+          <div class="panel panel-default panel-transparent">
+            <div class="panel-heading" id="panelHeading">Location</div>
+            <div class="panel-body" style="height:95%">
+              <div id="results" class="panel-body"></div>
+              <!-- Google Map div -->
+              <div id="map-canvas" style="height:97%"></div>
+            </div>
+
+          </div>
+      </div>
+
+    <script>
+      // SH: These scripts will get the information from API calls to and create the Google Map to locate the event provider
+
+      // Get the eventproviderId from the query param
+      var urlParams = new URLSearchParams(window.location.search);
+      var endroit = urlParams.getAll('endroit');
+      document.getElementById("panelHeading").innerHTML = eventproviderId;
+      // Getting the GeoCode of the Eventprovider
+      //var url = "https://www.pap.fr/annonce/vente-maisons-bourgogne-g464-jusqu-a-200000-euros";
+      var url = "https://integrationsuite-trial.integrationsuitetrial-apim.eu10.hana.ondemand.com:443/integrationsuite/v1/PAP";
+
+      // Create the call to the XS API
+      function getData(){
+        alert("Starting get data");
+        var xmlhttp = new XMLHttpRequest();
+        
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+        var responseHTML = xmlhttp.responseText;
+        var el = document.createElement( 'html' );
+        el.innerHTML = responseHTML;
+        el.getElementsByTagName( 'span' );
+        el.getElementsByClassName('item-title');
+        document.getElementById("results").innerHTML = el[0].innerHTML;
+      }
+
+      // Function to show the markers on a map from a JSON file
+      /*function showMarkers(lat, lng, eventproviderId){
+        // Create the map object
+        var mapOptions = {
+          center: { lat: parseFloat(lat), lng: parseFloat(lng)},
+          zoom: 12
+        };
+        var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        // Create the marker
+        var myLatlng = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: myMap,
+          title: eventproviderId.toString(),
+          icon: './images/Marker.png',
+          optimized: false
+        });
+      }*/
+
+    </script>
+
+
+    <!-- Bootstrap core JavaScript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  </body>
+  </html>
