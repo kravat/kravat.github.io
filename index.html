@@ -64,12 +64,14 @@
       // Get the eventproviderId from the query param
       var urlParams = new URLSearchParams(window.location.search);
       var endroit = urlParams.getAll('endroit');
+      document.getElementById("panelHeading").innerHTML = eventproviderId;
       // Getting the GeoCode of the Eventprovider
-      var url = "https://www.pap.fr/annonce/vente-maisons-bourgogne-g464-jusqu-a-200000-euros";
-      
+      //var url = "https://www.pap.fr/annonce/vente-maisons-bourgogne-g464-jusqu-a-200000-euros";
+      var url = "https://integrationsuite-trial.integrationsuitetrial-apim.eu10.hana.ondemand.com:443/integrationsuite/v1/PAP";
+
       // Create the call to the XS API
       function getData(){
-
+        alert("Starting get data");
         var xmlhttp = new XMLHttpRequest();
         
         xmlhttp.open("GET", url, true);
@@ -78,11 +80,9 @@
         var responseHTML = xmlhttp.responseText;
         var el = document.createElement( 'html' );
         el.innerHTML = responseHTML;
-        alert(responseHTML);
         el.getElementsByTagName( 'span' );
         el.getElementsByClassName('item-title');
-        alert(el[0]);
-        //document.getElementById("results").innerHTML = el[0];
+        document.getElementById("results").innerHTML = el[0].innerHTML;
       }
 
       // Function to show the markers on a map from a JSON file
